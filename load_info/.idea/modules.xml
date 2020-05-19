@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/loadinfo.iml" filepath="$PROJECT_DIR$/loadinfo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/loadinfo_android.iml" filepath="$PROJECT_DIR$/android/loadinfo_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/load_info.iml" filepath="$PROJECT_DIR$/.idea/load_info.iml" />
     </modules>
   </component>
 </project>
