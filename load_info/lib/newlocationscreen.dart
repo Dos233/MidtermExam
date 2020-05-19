@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:toast/toast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoder/geocoder.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 
 class LocationScreen extends StatefulWidget {
@@ -19,8 +20,8 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   _LocationScreenState({Key key,this.list,this.index});
-    List list;
-    int index;
+  List list;
+  int index;
   Position _currentPosition;
   String curaddress;
   String curstate;
@@ -128,7 +129,7 @@ class _LocationScreenState extends State<LocationScreen> {
   _launchPhone() async {
     String dummy=list[index]['contact'];
     var url = 'tel:{$dummy}';
-    
+
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -227,14 +228,14 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                     TableCell(
                       child: Container(
-                        alignment: Alignment.centerLeft,
-                        height: 180,
-                        child: FlatButton(onPressed: (){
-                          _launchURL();
-                        }, child: Text(list[index]['url'],
-                            style: TextStyle(
-                              color: Colors.black,
-                            )),)
+                          alignment: Alignment.centerLeft,
+                          height: 180,
+                          child: FlatButton(onPressed: (){
+                            _launchURL();
+                          }, child: Text(list[index]['url'],
+                              style: TextStyle(
+                                color: Colors.black,
+                              )),)
                       ),
                     ),
                     TableCell(
@@ -291,7 +292,23 @@ class _LocationScreenState extends State<LocationScreen> {
                     textColor: Colors.white,
                     elevation: 10,
                     onPressed: (){
-                      _openGooglemap(index);
+                      showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            content: Container(
+                              height: screenHeight/1.2,
+                              width: screenWidth/1.2,
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                imageUrl:
+                                'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude',
+                                placeholder: (context, url) =>
+                                new CircularProgressIndicator(),
+                                errorWidget: (context, url, error) => new Icon(Icons.error),
+                              ),
+                            ),
+                          )
+                      );
                     },
                   ),
                 ],
