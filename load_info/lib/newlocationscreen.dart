@@ -107,7 +107,7 @@ class _LocationScreenState extends State<LocationScreen> {
       _controller = Completer();
       _userpos = CameraPosition(
         target: LatLng(latitude, longitude),
-        zoom: 14.4746,
+        zoom: 100,
       );
 
       markers.add(Marker(
